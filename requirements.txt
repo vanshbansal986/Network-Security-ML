@@ -3,7 +3,18 @@ pandas
 numpy
 pymongo
 certifi
-pymongo[srv]==3.6
-
+scikit-learn
+mlflow
+notebook
+matplotlib
+python-box
+pyYAML
+tqdm
+ensure
+joblib
+types-PyYAML
+Flask
+Flask-Cors
+ipykernel
 
 ##-e .
