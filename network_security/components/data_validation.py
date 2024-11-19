@@ -71,8 +71,8 @@ class DataValidation:
         
         try:
             # Getting the current train and test file path
-            train_file_path = self.data_ingestion_artifact.training_file_path
-            test_file_path = self.data_ingestion_artifact.testing_file_path
+            train_file_path = self.data_ingestion_artifact.trained_file_path
+            test_file_path = self.data_ingestion_artifact.test_file_path
 
             # Reading the data from train and test
             train_df = pd.read_csv(train_file_path)
@@ -106,8 +106,8 @@ class DataValidation:
             
             data_validation_artifact = DataValidationArtifact(
                 validation_status=status,
-                valid_train_file_path=train_file_path,
-                valid_test_file_path=test_file_path,
+                valid_train_file_path = train_file_path,
+                valid_test_file_path = test_file_path,
                 invalid_train_file_path=None,
                 invalid_test_file_path=None,
                 drift_report_file_path=self.data_validation_config.drift_report_file_path,
