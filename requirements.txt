@@ -16,5 +16,7 @@ types-PyYAML
 Flask
 Flask-Cors
 ipykernel
+scipy
+dill
 
 ##-e .
