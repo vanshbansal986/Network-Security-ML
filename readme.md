@@ -12,7 +12,6 @@
 - [FastAPI Interface](#fastapi-interface)
 - [Setup](#setup)
 - [Usage](#usage)
-- [Contributing](#contributing)
 - [License](#license)
 
 ## Overview
@@ -309,13 +308,31 @@ To set up the environment for this project, follow the steps below:
    pip install -r requirements.txt
    ```
 
-3. **Set Up MongoDB**:
-   Ensure that you have a MongoDB instance running and accessible. Update the connection details in the configuration files as necessary.
+3. **Update Dagshub Credentials**:
+   In the file `network_security/components/model_trainer.py`, replace the Dagshub credentials accordingly:
+   ```python
+   dagshub.init(repo_owner=<your username>, repo_name=<your repo name>, mlflow=True)
+   ```
 
-4. **Environment Variables**:
+4. **Set Up MongoDB**:
+   Ensure that you have a MongoDB instance running and accessible. In the main function of the file `push_data.py`, update your MongoDB credentials as follows:
+   ```python
+   FILE_PATH = "network_data/phisingData.csv"
+   DATABASE = <Your database name>
+   collection = <Your collection name>
+   ```
+
+   Additionally, create a `.env` file in the root directory of the project and add your MongoDB URL:
+   ```plaintext
+   MONGO_DB_URL=your_mongodb_connection_string
+   ```
+
+5. **Environment Variables**:
    If applicable, set up any required environment variables for the project.
 
----
+
+
+
 
 ## Usage
 
@@ -341,3 +358,7 @@ Once the setup is complete, you can use the project as follows:
    ```
 
 Once the server is running, you can send POST requests to the prediction endpoint to receive outputs based on input data.
+
+## License
+
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more information.
