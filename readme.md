@@ -133,7 +133,7 @@ Here is a high-level view of the project structure:
 
 The Data Ingestion phase is crucial for setting up the initial dataset required for the Machine Learning workflow. This step ingests data from a MongoDB database and structures it for further processing. Below is a breakdown of the Data Ingestion process:
 
-![Data Ingestion](https://your-image-url-here)
+![Data Ingestion](https://github.com/vanshbansal986/Network-Security-ML/blob/main/images2/data_ingestion.png)
 
 #### Key Steps:
 
