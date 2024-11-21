@@ -8,8 +8,6 @@
   - [Data Validation](#data-validation)
   - [Data Transformation](#data-transformation)
   - [Model Training](#model-training)
-  - [Model Evaluation](#model-evaluation)
-  - [Model Pushing](#model-pushing)
 - [MLFlow & Dagshub](#mlflow--dagshub)
 - [FastAPI Interface](#fastapi-interface)
 - [Setup](#setup)
@@ -247,3 +245,99 @@ The Model Training phase is vital for building and optimizing a machine learning
 
 6. **Artifact Creation**:
    - After training, the best model is saved as an object (`model.pkl`) along with associated metrics, which are logged for future reference.
+
+## MLFlow & Dagshub
+
+In this project, MLFlow and Dagshub are utilized for effective tracking of experiments, model performance, and version control. These tools enhance the reproducibility and maintainability of the machine learning workflow.
+
+### MLFlow
+
+MLFlow is an open-source platform designed for managing the machine learning lifecycle. It provides various components including:
+
+- **Experiment Tracking**: MLFlow allows tracking of model training runs, parameters, metrics, and artifacts. Each experiment is recorded, making it easy to compare model performance over time.
+- **Model Repository**: Models can be logged and later retrieved for deployment or further analysis. The built-in tracking server stores all experiment details in one place.
+
+### Key Features of MLFlow in this Project:
+- Logging of hyperparameters and metrics during model training.
+- Storage of trained model files for easy retrieval.
+- Visualization tools for comparing different runs and determining the best-performing model.
+
+### Dagshub
+
+Dagshub serves as a remote repository tailored for data science and machine learning projects. It integrates well with Git and supports versioning for datasets, code, and model files.
+
+### Key Features of Dagshub in this Project:
+- **Version Control**: Facilitates tracking changes in datasets and code, allowing team collaboration and versioning for reproducibility.
+- **Experiment Management**: Dagshub provides a platform for storing and comparing different experiments, complements MLFlow’s capabilities by preserving all components of the workflow in a single location.
+
+### Integration
+In this project, both MLFlow and Dagshub are configured to work together, ensuring that every aspect of the training and evaluation process is logged and easily accessible. This integration enhances project transparency and allows for effective collaboration among team members.
+
+
+
+## FastAPI Interface
+
+The FastAPI framework is used to create a simple web interface for making predictions based on the trained machine learning model. This interface allows users to input data and receive predictions, facilitating easy interaction with the model.
+
+### Key Features:
+- **RESTful API**: FastAPI provides a RESTful interface to interact with the model, making it accessible for various applications.
+- **Data Validation**: Incoming requests are validated automatically, ensuring that the data format aligns with the expected schema.
+- **Asynchronous Support**: FastAPI leverages asynchronous programming, improving performance for handling multiple requests.
+
+### How to Run:
+To start the FastAPI application, run the following command in your terminal:
+```bash
+uvicorn app:app --reload
+```
+This will start the server locally, and you can access the interface at `http://127.0.0.1:8000/docs` to view the available endpoints.
+
+---
+
+## Setup
+
+To set up the environment for this project, follow the steps below:
+
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/your-username/network-security-ml-project.git
+   cd network-security-ml-project
+   ```
+
+2. **Install Dependencies**:
+   Use the provided `requirements.txt` file to install the necessary packages:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. **Set Up MongoDB**:
+   Ensure that you have a MongoDB instance running and accessible. Update the connection details in the configuration files as necessary.
+
+4. **Environment Variables**:
+   If applicable, set up any required environment variables for the project.
+
+---
+
+## Usage
+
+Once the setup is complete, you can use the project as follows:
+
+1. **Push Data To MongoDB**:
+   Push data to MongoDB by running the push_data script:
+   ```bash
+   python push_data.py
+   ```
+
+
+2. **Execute main pipeline**:
+   Execute the main.py file to run the pipeline and all its components:
+   ```bash
+   python main.py
+   ```
+
+3. **Run the FastAPI Application**:
+   Start the FastAPI server to make predictions:
+   ```bash
+   uvicorn app:app --reload
+   ```
+
+Once the server is running, you can send POST requests to the prediction endpoint to receive outputs based on input data.
