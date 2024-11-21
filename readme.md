@@ -130,9 +130,9 @@ Here is a high-level view of the project structure:
 
 ```
 
-## Pipeline Components
+# Pipeline Components
 
-### Data Ingestion
+## Data Ingestion
 
 The Data Ingestion phase is crucial for setting up the initial dataset required for the Machine Learning workflow. This step ingests data from a MongoDB database and structures it for further processing. Below is a breakdown of the Data Ingestion process:
 
@@ -161,3 +161,89 @@ The Data Ingestion phase is crucial for setting up the initial dataset required 
   - **Ingested Data** folders containing `train.csv` and `test.csv` files for subsequent processing.
 
 This structured approach ensures that the data flow into the pipeline is efficient, clean, and well-documented, providing a strong foundation for further stages of the data processing pipeline.
+
+## Data Validation
+
+The Data Validation phase ensures that the ingested data meets the necessary quality standards before proceeding to the next steps in the Machine Learning pipeline. The following diagram outlines the key aspects of this process:
+
+![Data Validation](https://github.com/vanshbansal986/Network-Security-ML/blob/main/images2/data_validation.png)
+
+### Overview of the Process:
+
+1. **Configuration**:
+   - The process starts with a **Data Validation Config** that defines directories for valid and invalid data, as well as paths for drift reports.
+
+2. **Initiate Validation**:
+   - Data validation is initiated, starting with reading the ingested CSV files (`train.csv` and `test.csv`).
+
+3. **Column Validation**:
+   - The number of columns and their data types is validated against the predefined schema. This includes checks to ensure the correct columns are present and that numerical columns exist.
+
+4. **Validation Status**:
+   - The validation status is recorded, indicating whether any columns are missing or if there are issues with the data types.
+
+5. **Dataset Drift Detection**:
+   - If the initial validation passes, the process checks for dataset drift, which helps ensure that the data remains consistent with the training parameters.
+
+6. **Data Validation Artifact**:
+   - Finally, a **Data Validation Artifact** is created, summarizing the validation status and producing a drift report in JSON format.
+
+
+## Data Transformation
+
+The Data Transformation phase prepares the validated data for modeling by handling missing values and scaling features. The following diagram illustrates the key steps in this process:
+
+![Data Transformation](https://github.com/vanshbansal986/Network-Security-ML/blob/main/images2/data_transformation.png)
+
+### Overview of the Process:
+
+1. **Configuration**:
+   - The process begins with a **Data Transformation Config**, which sets the parameters for the transformation pipeline.
+
+2. **Initiate Data Transformation**:
+   - The data transformation process is initiated, starting with the reading of the validated CSV files (`train.csv` and `test.csv`).
+
+3. **Feature Handling**:
+   - Missing values in the dataset are handled using techniques such as Robust Scaling and KNN Imputer. The target column is dropped from the training data to prepare for transformation.
+
+4. **Data Preparation**:
+   - The training and testing data are converted into feature arrays, preparing for input into the ML model. Techniques like SMOTE are applied to address imbalances in the data.
+
+5. **Concatenation and Finalization**:
+   - The final transformed training and testing arrays are created and concatenated accordingly.
+
+6. **Artifact Creation**:
+   - The transformation includes saving a preprocessor object (`preprocessing.pkl`) and the resulting numpy arrays (`train.npy` and `test.npy`) as artifacts for future use.
+
+
+## Model Training
+
+The Model Training phase is vital for building and optimizing a machine learning model based on the transformed data. The following diagram illustrates the core steps involved in this process:
+
+![Model Training](https://github.com/vanshbansal986/Network-Security-ML/blob/main/images2/model_trainer.png)
+
+### Overview of the Process:
+
+1. **Configuration**:
+   - The process begins with a **Model Trainer Config** that defines parameters such as model file paths and expected accuracy.
+
+2. **Initiate Model Training**:
+   - Model training is initiated by loading the transformed numpy arrays (`train.npy` and `test.npy`) for further processing.
+
+3. **Data Preparation**:
+   - The training and testing arrays are prepared by splitting the features and target values, ensuring the data is structured for model input.
+
+4. **Model Selection**:
+   - Multiple models are evaluated, including:
+     - Random Forest
+     - Decision Tree
+     - Gradient Boosting
+     - Logistic Regression
+     - AdaBoost
+   - GridSearchCV is utilized for hyperparameter tuning to find the best combination of parameters for each model.
+
+5. **Model Evaluation**:
+   - The best-performing model is selected based on evaluation metrics, including the best score compared to the expected accuracy.
+
+6. **Artifact Creation**:
+   - After training, the best model is saved as an object (`model.pkl`) along with associated metrics, which are logged for future reference.
