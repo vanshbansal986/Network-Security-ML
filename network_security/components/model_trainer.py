@@ -13,6 +13,11 @@ from sklearn.linear_model import LogisticRegression
 import pandas as pd
 import sys
 import os
+import mlflow
+from urllib.parse import urlparse
+
+import dagshub
+dagshub.init(repo_owner='vanshbansal986', repo_name='Network-Security-ML', mlflow=True)
 
 
 class ModelTrainer:
@@ -25,7 +30,33 @@ class ModelTrainer:
             self.data_transformation_artifact = data_transformation_artifact
         except Exception as e:
             raise NetworkSecurityException(e,sys)
-        
+    
+    def track_mlflow(self , best_model , classification_metric):
+        with mlflow.start_run():
+            
+            # mlflow.set_registry_uri("https://dagshub.com/krishnaik06/networksecurity.mlflow")
+            # tracking_url_type_store = urlparse(mlflow.get_tracking_uri()).scheme
+
+            f1_score = classification_metric.f1_score
+            precison = classification_metric.precision_score
+            recall_score = classification_metric.recall_score
+
+            mlflow.log_metric("f1 score" , f1_score)
+            mlflow.log_metric("precison" , precison)
+            mlflow.log_metric("recall_score" , recall_score)
+            mlflow.sklearn.log_model(best_model , "best model")
+
+            # Model registry does not work with file store
+            # if tracking_url_type_store != "file":
+
+            #     # Register the model
+            #     # There are other ways to use the Model Registry, which depends on the use case,
+            #     # please refer to the doc for more information:
+            #     # https://mlflow.org/docs/latest/model-registry.html#api-workflow
+            #     mlflow.sklearn.log_model(best_model, "model", registered_model_name=best_model)
+            # else:
+            #     mlflow.sklearn.log_model(best_model, "model")
+
     def train_model(self , x_train,y_train,x_test,y_test):
         models = {
                 "Random Forest": RandomForestClassifier(verbose=1),
@@ -42,14 +73,13 @@ class ModelTrainer:
             },
             "Random Forest":{
                 # 'criterion':['gini', 'entropy', 'log_loss'],
-                
                 # 'max_features':['sqrt','log2',None],
                 'n_estimators': [8,16,32,128,256]
             },
             "Gradient Boosting":{
                 # 'loss':['log_loss', 'exponential'],
-                'learning_rate':[.1,.01,.05,.001],
-                'subsample':[0.6,0.7,0.75,0.85,0.9],
+                # 'learning_rate':[.1,.01,.05,.001],
+                # 'subsample':[0.6,0.7,0.75,0.85,0.9],
                 # 'criterion':['squared_error', 'friedman_mse'],
                 # 'max_features':['auto','sqrt','log2'],
                 'n_estimators': [8,16,32,64,128,256]
@@ -63,7 +93,7 @@ class ModelTrainer:
         }
 
         model_report:dict=evaluate_models(X_train=x_train,y_train=y_train,X_test=x_test,y_test=y_test,
-                                          models=models,param=params)
+                                        models=models,param=params)
         
          ## To get best model score from dict
         best_model_score = max(sorted(model_report.values()))
@@ -82,6 +112,9 @@ class ModelTrainer:
         y_test_pred=best_model.predict(x_test)
         classification_test_metric = get_classification_score(y_true=y_test,y_pred=y_test_pred)
 
+        # Tracking using MLFlow
+        self.track_mlflow(best_model , classification_train_metric)
+        self.track_mlflow(best_model , classification_test_metric)
 
         preprocessor = load_object(file_path = self.data_transformation_artifact.transformed_object_file_path)
             

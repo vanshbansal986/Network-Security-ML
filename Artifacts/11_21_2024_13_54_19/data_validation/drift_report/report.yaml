@@ -1,0 +1,93 @@
+Abnormal_URL:
+  drift_status: false
+  p_value: 0.7626508373574088
+DNSRecord:
+  drift_status: false
+  p_value: 0.8922329684446557
+Domain_registeration_length:
+  drift_status: false
+  p_value: 0.9999983994854099
+Favicon:
+  drift_status: false
+  p_value: 0.9999977235497168
+Google_Index:
+  drift_status: false
+  p_value: 1.0
+HTTPS_token:
+  drift_status: false
+  p_value: 0.9994193854231466
+Iframe:
+  drift_status: false
+  p_value: 0.9999999095448506
+Links_in_tags:
+  drift_status: false
+  p_value: 0.9990674182373884
+Links_pointing_to_page:
+  drift_status: false
+  p_value: 0.49088189490538015
+Page_Rank:
+  drift_status: false
+  p_value: 0.9999939100687764
+Prefix_Suffix:
+  drift_status: false
+  p_value: 0.9999999999981217
+Redirect:
+  drift_status: false
+  p_value: 1.0
+Request_URL:
+  drift_status: false
+  p_value: 1.0
+Result:
+  drift_status: false
+  p_value: 0.6736652494431914
+RightClick:
+  drift_status: false
+  p_value: 1.0
+SFH:
+  drift_status: false
+  p_value: 0.9999462839353719
+SSLfinal_State:
+  drift_status: false
+  p_value: 0.41542371654460253
+Shortining_Service:
+  drift_status: false
+  p_value: 0.963651411606526
+Statistical_report:
+  drift_status: false
+  p_value: 1.0
+Submitting_to_email:
+  drift_status: false
+  p_value: 0.9993169455931838
+URL_Length:
+  drift_status: false
+  p_value: 0.9999994872658009
+URL_of_Anchor:
+  drift_status: false
+  p_value: 0.799607973263929
+age_of_domain:
+  drift_status: false
+  p_value: 1.0
+double_slash_redirecting:
+  drift_status: false
+  p_value: 0.999991733805822
+having_At_Symbol:
+  drift_status: false
+  p_value: 0.9999968024420123
+having_IP_Address:
+  drift_status: false
+  p_value: 0.9960739355626311
+having_Sub_Domain:
+  drift_status: false
+  p_value: 0.9783976116108047
+on_mouseover:
+  drift_status: false
+  p_value: 0.9999852314115173
+popUpWidnow:
+  drift_status: false
+  p_value: 0.998917339140621
+port:
+  drift_status: false
+  p_value: 1.0
+web_traffic:
+  drift_status: false
+  p_value: 0.9987482621359624

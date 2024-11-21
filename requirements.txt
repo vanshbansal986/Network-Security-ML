@@ -18,5 +18,8 @@ Flask-Cors
 ipykernel
 scipy
 dill
-
+seaborn
+dagshub
+fastapi
+uvicorn
 ##-e .
