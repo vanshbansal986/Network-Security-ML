@@ -127,3 +127,37 @@ Here is a high-level view of the project structure:
 ├── 📜 test_mongodb.py                 # Script for testing MongoDB connections
 └── 📂 valida_data                     # Folder for testing project working on FastAPI web app.
     └── test.csv
+
+```
+
+## Pipeline Components
+
+### Data Ingestion
+
+The Data Ingestion phase is crucial for setting up the initial dataset required for the Machine Learning workflow. This step ingests data from a MongoDB database and structures it for further processing. Below is a breakdown of the Data Ingestion process:
+
+![Data Ingestion](https://your-image-url-here)
+
+#### Key Steps:
+
+1. **Configuration:**
+   - The **Data Ingestion Config** specifies various paths:
+     - **Data Ingestion Directory**: Directory where the ingested data will be stored.
+     - **Feature Store File Path**: Path for the feature store which holds the raw data.
+     - **Training and Testing File Paths**: Paths where training and testing datasets will be saved.
+     - **Collection Name**: Name of the MongoDB collection from which data will be ingested.
+     - **Train-Test Split Ratio**: Defines the proportion of data allocated for training versus testing.
+2. **Initiate Data Ingestion:**
+   - The process begins by calling the data ingestion function, which connects to the specified MongoDB database.
+
+3. **Export Data to Feature Store:**
+   - The data is exported to the feature store as a CSV file. This is the raw data and serves as the baseline for all subsequent processes.
+4. **Data Ingestion Artifact:**
+   - Finally, a **Data Ingestion Artifact** is created to maintain metadata about the ingestion process, including timestamps and paths to the ingested files.
+
+#### Output:
+- The end result of the Data Ingestion process is the creation of:
+  - **Feature Store** containing the raw dataset as CSV.
+  - **Ingested Data** folders containing `train.csv` and `test.csv` files for subsequent processing.
+
+This structured approach ensures that the data flow into the pipeline is efficient, clean, and well-documented, providing a strong foundation for further stages of the data processing pipeline.
