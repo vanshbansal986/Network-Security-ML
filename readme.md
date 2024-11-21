@@ -29,7 +29,7 @@ Key components used in this project:
 ## Project Structure
 Here is a high-level view of the project structure:
 
-![Project Structure](https://github.com/vanshbansal986/Network-Security-ML/blob/main/images/project_structure.png)
+![Project Structure](https://github.com/vanshbansal986/Network-Security-ML/blob/main/images2/project_structure.png)
 
 ```bash
 📂 network-security-ml-project
